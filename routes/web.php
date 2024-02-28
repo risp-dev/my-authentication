@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,25 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::redirect('/redirect-me', '/zombie/1');
+
+Route::get('/json-response', function(){
+    $data = [
+        'name' => 'Some Zombie name',
+        'strength' => 'Strong',
+    ];
+    return response()->json($data);
+});
+
+//cookie
+Route::get('/set_cookie', function(){
+    return response()->view('apocalypse')->cookie('name', 'value', 10);
+});
+
+Route::get('/apocalypse', function() {
+    return 'This is the end of the World!';
+});
 
 Route::get('/', function () {
     return view('welcome');
